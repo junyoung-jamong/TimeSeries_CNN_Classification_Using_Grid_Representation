@@ -14,7 +14,7 @@ class CNN(models.Sequential):
         self.add(layers.Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
         self.add(layers.MaxPool2D(pool_size=(2, 2)))
         self.add(layers.Dropout(0.25))
-        self.add(layers.Conv2D(64, (3, 3), activation='relu'))
+        self.add(layers.Conv2D(32, (3, 3), activation='relu'))
         self.add(layers.MaxPool2D(pool_size=(2, 2)))
         self.add(layers.Dropout(0.25))
         self.add(layers.Flatten())
@@ -81,6 +81,8 @@ if __name__ == '__main__':
 
     data = DATA()
     model = CNN(data.input_shape, data.num_classes)
+
+    model.summary()
 
     history = model.fit(data.x_train, data.y_train,
                         batch_size=batch_size,

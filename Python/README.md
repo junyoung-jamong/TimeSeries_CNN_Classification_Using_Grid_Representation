@@ -64,6 +64,13 @@ if m=5, n=7
 Grid representation of sample from CBF([UCR archive](https://www.cs.ucr.edu/~eamonn/time_series_data/)) dataset. The partition
 matrix is 15 × 30
 
+Convolutional Neural Networks architecture
+----------------------
+####Simple Convolutional Neural Networks architecture for grid representation
+![simple cnn architecture](./assets/img/Simple_CNN_architecture.png)
+CNN architecture for time-series classification. This architecture consists of 2 convolution, 2 pooling, and 2 fully-connected layers.
+The reason for designing this architecture is to compare with the experimental results of [Hatami et al.](https://arxiv.org/pdf/1710.00886.pdf)(2018) in which the time series are transformed into images using *Recurrent Plot* and the CNN classification is performed.
+
 Experiences 
 ----------------------
 ### Results of grid representation classification for time-series 
@@ -95,7 +102,7 @@ Experiences
 ### Results of CNN Classification with time-series grid representation
 | Datasets  | (m, n) | error rate |
 | :--- | :---: | :---: |
-| CBF | (28, 28) | 0.006 |
+| CBF | (28, 28) | 0.001 |
 | ... | ... | ... |
 
 Example
