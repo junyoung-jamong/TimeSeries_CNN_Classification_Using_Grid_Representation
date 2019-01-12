@@ -58,7 +58,7 @@ class Grid:
         for ts in ts_set:
             matrices.append(self.ts2Matrix(ts))
 
-        return matrices
+        return np.array(matrices)
 
     def ts2Matrix(self, ts):
         matrix = np.zeros((self.m, self.n))
