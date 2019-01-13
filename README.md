@@ -60,20 +60,20 @@ if m=5, n=7
 >output: [[0 0 0 0 0 0 1], [0 0 1 0 1 0 0], [0 2 0 0 1 0 1], [1 0 0 1 0 1 0], [1 0 1 1 0 1 0]]
 
 #### Grid representation example
-![representation_sample](./assets/img/Grid_representation_of_sample_from_CBF_dataset.png)
+![representation_sample](Python/assets/img/Grid_representation_of_sample_from_CBF_dataset.png)
 Grid representation of sample from CBF([UCR archive](https://www.cs.ucr.edu/~eamonn/time_series_data/)) dataset. The partition
 matrix is 15 × 30
 
 Convolutional Neural Networks architecture
 ----------------------
-####Simple Convolutional Neural Networks architecture for grid representation
-![simple cnn architecture](./assets/img/Simple_CNN_architecture.png)
+#### Simple Convolutional Neural Networks architecture for grid representation
+![simple cnn architecture](Python/assets/img/Simple_CNN_architecture.png)
 CNN architecture for time-series classification. This architecture consists of 2 convolution, 2 pooling, and 2 fully-connected layers.
 The reason for designing this architecture is to compare with the experimental results of [Hatami et al.](https://arxiv.org/pdf/1710.00886.pdf)(2018) in which the time series are transformed into images using *Recurrent Plot* and the CNN classification is performed.
 
 Experiences 
 ----------------------
-### Results of grid representation classification for time-series 
+#### Results of grid representation classification for time-series 
 | Datasets  | (m,n) | GMED | GMDTW |
 | :--- | :---: | :---: | :---: |
 | 50words | (6, 11) | 0.330 | 0.301 |
@@ -82,11 +82,11 @@ Experiences
 | Car | (3, 11) | 0.300 | 0.310 |
 | CBF | (3, 11) | 0.003 | 0.003 |
 | Coffee | (11, 13) | 0.071 | 0.036 |
-| ECG200 | (7, 7) | 0.2 | 0.2 |
+| ECG200 | (7, 7) | 0.200 | 0.200 |
 | FaceAll | (5, 27) | 0.267 | 0.256 |
 | FaceFour | (8, 18) | 0.364 | 0.136 |
 | FISH | (11, 19) | 0.269 | 0.251 |
-| Gun_Point | (35, 11) | 0.14 | 0.047 |
+| Gun_Point | (35, 11) | 0.140 | 0.047 |
 | Lighting2 | (16, 23) | 0.246 | 0.230 |
 | Lighting7 | (5, 6) | 0.370 | 0.384 |
 | OliveOil | (29, 6) | 0.300 | 0.267 |
@@ -99,7 +99,7 @@ Experiences
 | wafer | (4, 29) | 0.009 | 0.008 |
 | yoga | (30, 23) | 0.180 | 0.144 |
 
-### Results of CNN Classification with time-series grid representation
+#### Results of CNN Classification with time-series grid representation
 | Datasets  | (m, n) | error rate |
 | :--- | :---: | :---: |
 | CBF | (28, 28) | 0.001 |
@@ -107,10 +107,10 @@ Experiences
 
 Example
 ----------------------
- * [Grid representation classification](./Examples/grid_matrix_sample.py) reproduced the algorithm and experiment of "Similarity measures for time series data classification using
-grid representation and matrix distance(2018)"
+ * [Grid Representation Classification](Python/Examples/grid_matrix_sample.py) - We reproduced the algorithm and experiment of "Similarity measures for time series data classification using
+grid representation and matrix distance(2018)".
 
- * [Simple CNN classification for Grid representation](./Examples/grid_matrix_based_cnn_classification.py) 
+ * [Simple CNN Classification For Grid Representation](Python/Examples/grid_matrix_based_cnn_classification.py) - We converted the time series to grid-based matrix and performed classification using the CNN architecture with 2 convolution layers.
 
 Credits
 ----------------------
