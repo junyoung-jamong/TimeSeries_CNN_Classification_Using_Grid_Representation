@@ -100,6 +100,12 @@ Experiences
 | Two_Patterns | (16, 23) | 0.020 | 0.036 |
 | wafer | (4, 29) | 0.009 | 0.008 |
 | yoga | (30, 23) | 0.180 | 0.144 |
+In this experiment, we represented time-series data as a grid-based matrix and performed 1-NN classification on test data sets. 
+For each data-set, the number of rows and columns in the grid is determined by the LOOCV(leave-one-out cross validation) 1-NN classification using the training data-set.
+For more detailed parameters learning procedures, reference [Yangqing Ye et al.](https://link.springer.com/article/10.1007/s10115-018-1264-0) paper.
+Note that there is a problem that their experiments are not reproduced accurately. For this reason, we can confirm that the parameters obtained by learning are different from those of Yangqing Ye et al's. For more reliable results, please do your own experiments and check the results.
+
+
 
 In this experiment, we represented time-series data as a grid-based matrix and performed 1-NN classification on test data sets. 
 For each data-set, the number of rows and columns in the grid is determined by the LOOCV(leave-one-out cross validation) 1-NN classification using the training data-set.
