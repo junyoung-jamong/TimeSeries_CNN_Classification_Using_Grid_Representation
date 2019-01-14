@@ -1,6 +1,8 @@
 # TimeSeries CNN Classification Using Grid Representation
-This project aims to apply the CNN algorithm - which has achieved great results in image processing - by treating the time-series data as an image.
-Grid-based representation algorithms are used to represent time-series data as images. 
+The purpose of this project is to apply the CNN algorithm(which has achieved great results in image processing) to time series data by representing time series data as images.
+We first discuss how to represent time series data as images.
+Grid-based representation algorithms are used to represent time-series data as images.
+The time series data represented in the image can be used as input values of various CNN based algorithms. 
 
 Normalization
 ----------------------
@@ -74,7 +76,7 @@ The reason for designing this architecture is to compare with the experimental r
 Experiences 
 ----------------------
 #### Results of grid representation classification for time-series 
-| Datasets  | (m,n) | GMED | GMDTW |
+| Datasets | (m,n) | GMED | GMDTW |
 | :--- | :---: | :---: | :---: |
 | 50words | (6, 11) | 0.330 | 0.301 |
 | Adiac | (21, 32) | 0.448 | 0.465 |
@@ -99,11 +101,36 @@ Experiences
 | wafer | (4, 29) | 0.009 | 0.008 |
 | yoga | (30, 23) | 0.180 | 0.144 |
 
+In this experiment, we represented time-series data as a grid-based matrix and performed 1-NN classification on test data sets. 
+For each data-set, the number of rows and columns in the grid is determined by the LOOCV(leave-one-out cross validation) 1-NN classification using the training data-set.
+For more detailed parameters learning procedures, reference [Yangqing Ye et al.](https://link.springer.com/article/10.1007/s10115-018-1264-0) paper.
+Note that there is a problem that their experiments are not reproduced accurately. For this reason, we can confirm that the parameters obtained by learning are different from those of Yangqing Ye et al's. For more reliable results, please do your own experiments and check the results.
+
+
+
 #### Results of CNN Classification with time-series grid representation
-| Datasets  | (m, n) | error rate |
-| :--- | :---: | :---: |
-| CBF | (28, 28) | 0.001 |
-| ... | ... | ... |
+| Datasets | ((m, n), batch, epoch) | Error_rate | ((m, n), batch, epoch) | Error_rate |
+| :--- | :---: | :---: | :---: | :---: |
+| 50words |  |  |  |  |
+| Adiac |  |  |  |  |
+| Beef |  |  |  |  |
+| CBF | (28, 28), 5, 1000 | 0.001 | (56, 56), 5, 50 | 0.001 |
+| Coffee |  |  |  |  |
+| ECG200 |  |  |  |  |
+| FaceAll |  |  |  |  |
+| FaceFour |  |  |  |  |
+| FISH |  |  |  |  |
+| Gun_Point |  |  |  |  |
+| Lighting2 |  |  |  |  |
+| Lighting7 |  |  |  |  |
+| OliveOil |  |  |  |  |
+| OSULeaf |  |  |  |  |
+| SwedishLeaf |  |  |  |  |
+| synthetic_control |  |  |  |  |
+| Trace |  |  |  |  |
+| Two_Patterns |  |  |  |  |
+| wafer |  |  |  |  |
+| yoga |  |  |  |  |
 
 Example
 ----------------------

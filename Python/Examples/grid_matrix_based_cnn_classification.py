@@ -27,12 +27,12 @@ class CNN(models.Sequential):
                      metrics=['accuracy'])
 
 class DATA():
-    def __init__(self):
-        x_trains, y_trains, x_tests, y_tests = get_example_train_test_datasets()
+    def __init__(self, dataset, m, n):
+        x_trains, y_trains, x_tests, y_tests = get_ucr_train_test_datasets(dataset)
         x_trains = feature_scaling_datasets(x_trains)
         x_tests = feature_scaling_datasets(x_tests)
 
-        g = Grid(28, 28)
+        g = Grid(m, n)
         x_train = g.dataset2Matrices(x_trains)
         x_test = g.dataset2Matrices(x_tests)
 
@@ -76,13 +76,13 @@ class DATA():
         self.x_test, self.y_test = x_test, y_test
 
 if __name__ == '__main__':
-    batch_size = 5
-    epochs = 1000
+    batch_size = 20
+    epochs = 100
 
-    data = DATA()
+    dataset = "yoga"
+
+    data = DATA(dataset, 28, 28)
     model = CNN(data.input_shape, data.num_classes)
-
-    model.summary()
 
     history = model.fit(data.x_train, data.y_train,
                         batch_size=batch_size,
@@ -93,4 +93,39 @@ if __name__ == '__main__':
     score = model.evaluate(data.x_test, data.y_test)
     print()
     print('Test loss:', score[0])
-    print('Test accuracy:', score[1])
+    print('Test accuracy : ', score[1])
+    error_rate28 = round(1 - score[1], 3)
+
+    data = DATA(dataset, 56, 56)
+    model = CNN(data.input_shape, data.num_classes)
+
+    history = model.fit(data.x_train, data.y_train,
+                        batch_size=batch_size,
+                        epochs=epochs,
+                        shuffle=True,
+                        validation_split=0.1)
+
+    score = model.evaluate(data.x_test, data.y_test)
+    print()
+    print('Test loss:', score[0])
+    print('Test accuracy : ', score[1])
+    error_rate56 = round(1 - score[1], 3)
+
+    data = DATA(dataset, 64, 64)
+    model = CNN(data.input_shape, data.num_classes)
+
+    history = model.fit(data.x_train, data.y_train,
+                        batch_size=batch_size,
+                        epochs=epochs,
+                        shuffle=True,
+                        validation_split=0.1)
+
+    score = model.evaluate(data.x_test, data.y_test)
+    print()
+    print('Test loss:', score[0])
+    print('Test accuracy : ', score[1])
+    error_rate64 = round(1 - score[1], 3)
+
+    print('error rate of [28x28] :', error_rate28)
+    print('error rate of [56x56] :', error_rate56)
+    print('error rate of [64x64] :', error_rate64)
