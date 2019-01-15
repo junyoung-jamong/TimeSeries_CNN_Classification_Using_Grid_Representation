@@ -45,8 +45,8 @@ class DATA():
         num_classes = len(class_set)
         min_class = min(class_set)
 
-        y_trains = [y-1 for y in y_trains]
-        y_tests = [y-1 for y in y_tests]
+        y_trains = [y-min_class for y in y_trains]
+        y_tests = [y-min_class for y in y_tests]
 
         if backend.image_data_format() == 'channels_first':
             x_train = x_train.reshape(x_train.shape[0], 1,
@@ -96,36 +96,4 @@ if __name__ == '__main__':
     print('Test accuracy : ', score[1])
     error_rate28 = round(1 - score[1], 3)
 
-    data = DATA(dataset, 56, 56)
-    model = CNN(data.input_shape, data.num_classes)
-
-    history = model.fit(data.x_train, data.y_train,
-                        batch_size=batch_size,
-                        epochs=epochs,
-                        shuffle=True,
-                        validation_split=0.1)
-
-    score = model.evaluate(data.x_test, data.y_test)
-    print()
-    print('Test loss:', score[0])
-    print('Test accuracy : ', score[1])
-    error_rate56 = round(1 - score[1], 3)
-
-    data = DATA(dataset, 64, 64)
-    model = CNN(data.input_shape, data.num_classes)
-
-    history = model.fit(data.x_train, data.y_train,
-                        batch_size=batch_size,
-                        epochs=epochs,
-                        shuffle=True,
-                        validation_split=0.1)
-
-    score = model.evaluate(data.x_test, data.y_test)
-    print()
-    print('Test loss:', score[0])
-    print('Test accuracy : ', score[1])
-    error_rate64 = round(1 - score[1], 3)
-
     print('error rate of [28x28] :', error_rate28)
-    print('error rate of [56x56] :', error_rate56)
-    print('error rate of [64x64] :', error_rate64)
