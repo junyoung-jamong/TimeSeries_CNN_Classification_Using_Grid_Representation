@@ -76,13 +76,14 @@ class DATA():
         self.x_test, self.y_test = x_test, y_test
 
 if __name__ == '__main__':
-    batch_size = 20
+    batch_size = 5
     epochs = 100
 
-    dataset = "yoga"
+    dataset = "Gun_Point"
 
     data = DATA(dataset, 28, 28)
     model = CNN(data.input_shape, data.num_classes)
+    model.summary()
 
     history = model.fit(data.x_train, data.y_train,
                         batch_size=batch_size,
@@ -94,6 +95,25 @@ if __name__ == '__main__':
     print()
     print('Test loss:', score[0])
     print('Test accuracy : ', score[1])
-    error_rate28 = round(1 - score[1], 3)
+    error_rate = round(1 - score[1], 3)
 
-    print('error rate of [28x28] :', error_rate28)
+    print('error rate of :', error_rate)
+
+    # plotting results
+    import matplotlib.pyplot as plt
+    acc = history.history['acc']
+    val_acc = history.history['val_acc']
+    loss = history.history['loss']
+    val_loss = history.history['val_loss']
+    epochs = range(1, len(acc) + 1)
+    plt.plot(epochs, acc, 'bo', label='Training acc')
+    plt.plot(epochs, val_acc, 'b', label='Validation acc')
+
+    plt.title('Training and validation accuracy')
+    plt.legend()
+    plt.figure()
+    plt.plot(epochs, loss, 'bo', label='Training loss')
+    plt.plot(epochs, val_loss, 'b', label='Validation loss')
+    plt.title('Training and validation loss')
+    plt.legend()
+    plt.show()

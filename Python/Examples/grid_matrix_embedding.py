@@ -38,7 +38,7 @@ def create_base_network(input_shape):
     model.add(layers.MaxPool2D(pool_size=(2, 2)))
     model.add(layers.Dropout(0.25))
     model.add(layers.Flatten())
-    model.add(layers.Dense(48, activation='relu'))
+    model.add(layers.Dense(128, activation='relu'))
     model.add(Lambda(lambda x: K.l2_normalize(x, axis=-1), name='normalize'))
 
     return model
