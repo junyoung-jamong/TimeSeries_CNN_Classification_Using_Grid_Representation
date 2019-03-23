@@ -11,6 +11,7 @@ class CNN(models.Sequential):
     def __init__(self, input_shape, num_classes):
         super().__init__()
 
+        '''
         self.add(layers.Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
         self.add(layers.MaxPool2D(pool_size=(2, 2)))
         self.add(layers.Dropout(0.25))
@@ -25,6 +26,27 @@ class CNN(models.Sequential):
         self.compile(loss=keras.losses.categorical_crossentropy,
                      optimizer='rmsprop',
                      metrics=['accuracy'])
+        '''
+
+        self.add(layers.Conv2D(32, kernel_size=(3, 3), input_shape=input_shape))
+        self.add(layers.BatchNormalization(name="batch_norm_1"))
+        self.add(layers.LeakyReLU(alpha=0.1))
+        self.add(layers.MaxPool2D(pool_size=(2, 2)))
+        self.add(layers.Dropout(0.25))
+        self.add(layers.Conv2D(32, (3, 3)))
+        self.add(layers.BatchNormalization(name="batch_norm_2"))
+        self.add(layers.LeakyReLU(alpha=0.1))
+        self.add(layers.MaxPool2D(pool_size=(2, 2)))
+        self.add(layers.Dropout(0.25))
+        self.add(layers.Flatten())
+        self.add(layers.Dense(128, activation='relu', kernel_regularizer=keras.regularizers.l2(0.01)))
+        self.add(layers.Dropout(0.5))
+        self.add(layers.Dense(num_classes, activation='softmax'))
+
+        self.compile(loss=keras.losses.categorical_crossentropy,
+                     optimizer='rmsprop',
+                     metrics=['accuracy'])
+
 
 class DATA():
     def __init__(self, dataset, m, n):

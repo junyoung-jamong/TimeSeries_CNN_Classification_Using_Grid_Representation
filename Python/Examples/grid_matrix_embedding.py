@@ -38,7 +38,9 @@ def create_base_network(input_shape):
     model.add(layers.MaxPool2D(pool_size=(2, 2)))
     model.add(layers.Dropout(0.25))
     model.add(layers.Flatten())
-    model.add(layers.Dense(128, activation='relu'))
+    #model.add(layers.Dense(128, activation='relu'))
+    #model.add(layers.Dense(64, activation='relu'))
+    model.add(layers.Dense(32, activation='relu'))
     model.add(Lambda(lambda x: K.l2_normalize(x, axis=-1), name='normalize'))
 
     return model
@@ -96,9 +98,6 @@ class DATA():
         x_train = x_train.astype('float32')
         x_test = x_test.astype('float32')
 
-        #x_train /= 255
-        #x_test /= 255
-
         self.input_shape = input_shape
         self.num_classes = num_classes
 
@@ -125,6 +124,7 @@ class DATA():
 def embedding_ED(x, y):
     return np.linalg.norm(x-y)
 
+'''
 def triplet_generator(n, class_set, class_wise_train_datasets, embedding_model):
     while True:
         a_batch = []
@@ -167,20 +167,30 @@ def triplet_generator(n, class_set, class_wise_train_datasets, embedding_model):
                             p_batch.append(pos[0])
                             n_batch.append(neg[0])
         yield [a_batch, p_batch, n_batch], None
+'''
+
+def triplet_generator():
+    while True:
+        a_batch = []
+        p_batch = []
+        n_batch = []
+
+
+        yield [a_batch, p_batch, n_batch], None
 
 if __name__ == '__main__':
     dataset = "synthetic_control"
-    m, n = 56, 56
+    m, n = 32, 32
     data = DATA(dataset, m, n)
 
     model, embedding_model = build_model(data.input_shape)
     #model.summary()
     #embedding_model.summary()
 
-    #f = embedding_model.predict(data.x_train)
+    #f = embedding_model.predict(np.array([x_train[0] for x_train in data.train_datasets]))
 
-    generator = triplet_generator(40, data.class_set, data.class_wise_train_datasets, embedding_model)
-    model.compile(loss=None, optimizer='adam')
+    #generator = triplet_generator(40, data.class_set, data.class_wise_train_datasets, embedding_model)
+    generator = triplet_generator()
 
     for i in range(10):
         d = next(generator)
@@ -195,8 +205,7 @@ if __name__ == '__main__':
     test_embeddings = [x[0] for x in data.test_datasets]
     test_embeddings = embedding_model.predict(np.array(test_embeddings))
 
-    #print(test_embeddings)
-
+    #1-NN classification with embedding
     predict_cnt = 0
     error_cnt = 0
     for q_idx in range(len(test_embeddings)):
@@ -217,8 +226,6 @@ if __name__ == '__main__':
             error_cnt += 1
 
     print('error_rate :', error_cnt/predict_cnt)
-
-
 
 '''
 [References]
